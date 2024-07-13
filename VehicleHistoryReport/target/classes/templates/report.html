@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicle History Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+        strong {
+            color: #000;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 15px;
+            background: #e9e9e9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        ul li p {
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            p, strong {
+                font-size: 1em;
+            }
+            ul li {
+                padding: 8px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+            h1 {
+                font-size: 1.2em;
+            }
+            h2 {
+                font-size: 1em;
+            }
+            p, strong {
+                font-size: 0.9em;
+            }
+            ul li {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Vehicle History Report</h1>
+    <div th:if="${vehicle != null}">
+        <p><strong>VIN:</strong> <span th:text="${vehicle.vin}"></span></p>
+        <p><strong>Make:</strong> <span th:text="${vehicle.make}"></span></p>
+        <p><strong>Model:</strong> <span th:text="${vehicle.model}"></span></p>
+        <p><strong>Year:</strong> <span th:text="${vehicle.year}"></span></p>
+
+        <div th:if="${vehicle.owners != null}">
+            <h2>Owners</h2>
+            <ul>
+                <li th:each="owner : ${vehicle.owners}">
+                    <p><strong>Name:</strong> <span th:text="${owner.name}"></span></p>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${vehicle.accidents != null and #lists.size(vehicle.accidents) > 0}">
+            <h2>Accidents</h2>
+            <ul>
+                <li th:each="accident : ${vehicle.accidents}">
+                    <p><strong>Date:</strong> <span th:text="${accident.date}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${accident.description}"></span></p>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${vehicle.maintenanceRecords != null and #lists.size(vehicle.maintenanceRecords) > 0}">
+            <h2>Maintenance Records</h2>
+            <ul>
+                <li th:each="record : ${vehicle.maintenanceRecords}">
+                    <p><strong>Date:</strong> <span th:text="${record.date}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${record.description}"></span></p>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${vehicle.mileages != null and #lists.size(vehicle.mileages) > 0}">
+            <h2>Mileage</h2>
+            <ul>
+                <li th:each="mileage : ${vehicle.mileages}">
+                    <p><strong>Date:</strong> <span th:text="${mileage.date}"></span></p>
+                    <p><strong>Mileage:</strong> <span th:text="${mileage.mileage}"></span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
