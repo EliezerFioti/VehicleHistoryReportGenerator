@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Vehicle History Report</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -54,16 +53,47 @@
     button:hover {
       background-color: #0056b3;
     }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+        max-width: 90%;
+      }
+      input[type="text"] {
+        font-size: 14px;
+      }
+      button {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+        max-width: 100%;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      input[type="text"] {
+        font-size: 12px;
+      }
+      button {
+        font-size: 12px;
+        padding: 6px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Enter VIN to Get Vehicle History</h1>
-    <form action="#" th:action="@{/api/v1/vehicles/vin}" method="post">
-      <label for="vin">VIN:</label>
-      <input type="text" id="vin" name="vin" required>
-      <button type="submit">Get Report</button>
-    </form>
-  </div>
+<div class="container">
+  <h1>Enter VIN to Get Vehicle History</h1>
+  <form action="report" method="get">
+    <label for="vehicleVin">VIN:</label>
+    <input type="text" id="vehicleVin" name="vehicleVin" required>
+    <button type="submit">Get Report</button>
+  </form>
+</div>
 </body>
 </html>
